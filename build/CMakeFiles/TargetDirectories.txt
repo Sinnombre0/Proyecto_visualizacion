@@ -1,0 +1,3 @@
+/home/angel-daniel/Descargas/Proyecto_visualizacion-master/build/CMakeFiles/3d.dir
+/home/angel-daniel/Descargas/Proyecto_visualizacion-master/build/CMakeFiles/edit_cache.dir
+/home/angel-daniel/Descargas/Proyecto_visualizacion-master/build/CMakeFiles/rebuild_cache.dir
