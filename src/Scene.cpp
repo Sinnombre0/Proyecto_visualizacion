@@ -1,5 +1,5 @@
 #include "Scene.h"
-#include "models/Cubo.h"
+#include "models/ObjModel.h"
 
 void Scene::mouseCallback(GLFWwindow *window, int button,int action,int mods)
 {
@@ -25,17 +25,16 @@ void Scene::init(){
     glfwSetWindowUserPointer(m_window->getWindow(), this);
     glfwSetMouseButtonCallback(m_window->getWindow(),Scene::mouseCallback);
     //Inicializacion de ProgramShader 
-    ShaderProgram* m_shaderProgram = new ShaderProgram("shaders/vertex_shader.glsl","shaders/frag_shader.glsl");
+    ShaderProgram* m_shaderProgram = new ShaderProgram("../shader/vertex_shader.glsl", "../shader/frag_shader.glsl");
     m_shaderPrograms.push_back(m_shaderProgram);
 
     //Se inicializan todos los modelos a usar
-    Model* cubo = new Cubo(m_shaderPrograms[0],0);
-    m_models.push_back(cubo);
+    // En lugar de "cubo" se instancia el objeto model (cambie lo que estaba por defecto)
+    Model* bunny = new ObjModel(m_shaderPrograms[0],"../assets/bunny.obj");
+    m_models.push_back(bunny);
 
-    Model* cubo2 = new Cubo(m_shaderPrograms[0],2);
-    m_models.push_back(cubo2);
-
-
+    Model* car = new ObjModel(m_shaderPrograms[0],"../assets/car.obj");
+    m_models.push_back(car);
 
     //Matriz de vista View Matrix
     //Posicion de la camara, centro de atencion, vector perpendicular de la Cámara
@@ -47,10 +46,8 @@ void Scene::init(){
 
 void Scene::render()  {
 
-    Model* model1 = m_models[0];
-    Model* model2 = m_models[1];
-
-
+    size_t modeloActual = 0;
+    bool teclaPresionada = false; //Evitamos que cambie muy rapido si se deja presionado
 
     //Ciclo de Renderizado
     glEnable(GL_DEPTH_TEST);  // Prueba de profundidad
@@ -70,24 +67,43 @@ void Scene::render()  {
             delete m_camera;
             m_camera = new OrbitCamera(glm::vec3(7.0f,4.0f,7.0f), glm::vec3(0.0f,0.5f,0.0f), glm::vec3(0.0,1.0,0.0));
         }
+        //Agregamos poder cambiar de modelo con las flechas del teclado
+        if(glfwGetKey(m_window->getWindow(), GLFW_KEY_RIGHT) == GLFW_PRESS) {
+            if(!teclaPresionada) {
+                modeloActual++;
+                // Volver al primer modelo
+                if(modeloActual >= m_models.size()) modeloActual = 0;
+                teclaPresionada = true; 
+            }
+        }
+        else if (glfwGetKey(m_window->getWindow(), GLFW_KEY_LEFT) == GLFW_PRESS) {
+            if (!teclaPresionada) {
+                if(modeloActual == 0) {
+                    modeloActual = m_models.size() - 1; // Ir al último
+                } else {
+                    modeloActual--;
+                }
+                teclaPresionada = true;
+            }
+        } 
+        else {
+            //Podemos presionar otra vez
+            teclaPresionada = false;
+        }
 
-        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+        glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        //Solo renderizamos el modelo actual
+        m_models[modeloActual]->renderModel(m_view, m_projection);
+        m_models[modeloActual]->updateModel(0.7f);
         
-        // se dibujan los modelos
-        model1->renderModel(m_view, m_projection);
-        model2->renderModel(m_view, m_projection);
-
-        
-
-
         // update models 
         glfwSwapBuffers(m_window->getWindow());
         glfwPollEvents();
 
-        model1->updateModel(0.7f);
-        
+        m_models[modeloActual]->updateModel(0.7f);
+
         if (m_cameraMovement)
         {
             double currX,currY = 0;

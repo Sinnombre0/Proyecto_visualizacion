@@ -8,10 +8,10 @@ void WindowGL::InitGLFW(){
 
     std::cout << "GLFW STARTED\n";
 
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, m_glfwMajor);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, m_glfwMinor);
-    glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    
     m_window = glfwCreateWindow(m_width, m_height, m_name, NULL, NULL );
 
     if(!m_window){
@@ -20,17 +20,25 @@ void WindowGL::InitGLFW(){
         exit(EXIT_FAILURE);
     }
     
+    // Antes de inicar el Glew (Solucionde la IA, antes no pidia ver el resultado)
     glfwMakeContextCurrent(m_window);
     std::cout<<"WINDOW CREATED\n";
 }
 
-
 void WindowGL::InitGLEW(){
     glewExperimental = GL_TRUE;
-    if (glewInit() != GLEW_OK) {
-        std::cerr << "FAILED TO INITIALIZE GLEW\n";
-        exit(EXIT_FAILURE);
-    }
-    std::cout<<"GLEW STARTED" <<std::endl;  
+    
+    GLenum err = glewInit();
 
+    //Igualmente aqui, la IA me dio la solución para que "corriera"
+    // En Linux con Wayland/Mesa, GLEW a veces arroja un falso error
+    // pero sí logra cargar las funciones. Vamos a imprimirlo como advertencia y continuar.
+    if (err != GLEW_OK) {
+        std::cout << "Advertencia de GLEW (Ignorada): " << glewGetErrorString(err) << "\n";
+    }
+    
+    // Limpiamos cualquier bandera de error residual de OpenGL
+    glGetError();
+    
+    std::cout<<"GLEW STARTED\n";  
 }

@@ -1,3 +1,0 @@
-/home/Shaggy/7semestre/Proyecto_visualizacion/build/CMakeFiles/3d.dir
-/home/Shaggy/7semestre/Proyecto_visualizacion/build/CMakeFiles/edit_cache.dir
-/home/Shaggy/7semestre/Proyecto_visualizacion/build/CMakeFiles/rebuild_cache.dir
