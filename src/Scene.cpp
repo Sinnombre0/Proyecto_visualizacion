@@ -29,8 +29,8 @@ void Scene::init(){
     ShaderProgram* m_shaderProgram = new ShaderProgram("../shader/vertex_shader.glsl", "../shader/frag_shader.glsl");
     m_shaderPrograms.push_back(m_shaderProgram);
 
-    ShaderProgram* axesShaderProgram = new ShaderProgram("../shader/ejes_vertex_shader.glsl", "../shader/ejes_shader.glsl");
-    m_shaderPrograms.push_back(axesShaderProgram);
+    ShaderProgram* ejesShaderProgram = new ShaderProgram("../shader/ejes_vertex_shader.glsl", "../shader/ejes_shader.glsl");
+    m_shaderPrograms.push_back(ejesShaderProgram);
 
     //Se inicializan todos los modelos a usar
     Model* ejes = new Eje(m_shaderPrograms[1], 0);
