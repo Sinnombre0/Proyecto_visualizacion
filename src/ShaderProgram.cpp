@@ -72,13 +72,11 @@ void ShaderProgram::setVec3(const std::string& name, float x, float y, float z) 
     glUniform3f(glGetUniformLocation(m_id, name.c_str()), x, y, z);
 }
 
-// RECUERDEN NO PUEDEN USAR GLM EN EL PROYECTO!!!! :(    
 void ShaderProgram::setVec3(const std::string& name, glm::vec3 vector) const{
     glUniform3fv(glGetUniformLocation(m_id, name.c_str()), 1, &vector[0]);
 
 }
 
-// RECUERDEN NO PUEDEN USAR GLM EN EL PROYECTO!!!! :(
 void ShaderProgram::setMat4x4(const std::string& name, const glm::mat4& value) const{
     glUniformMatrix4fv(glGetUniformLocation(m_id, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
 }

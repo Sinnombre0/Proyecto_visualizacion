@@ -8,7 +8,7 @@ void main()
 }
 */
 
-#version 330 core
+#version 400 core
 in float VertexHeight;
 
 // Usamos los límites que había puesto

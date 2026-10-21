@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "models/Ejes.h"
 #include "models/ObjModel.h"
 
 void Scene::mouseCallback(GLFWwindow *window, int button,int action,int mods)
@@ -28,13 +29,33 @@ void Scene::init(){
     ShaderProgram* m_shaderProgram = new ShaderProgram("../shader/vertex_shader.glsl", "../shader/frag_shader.glsl");
     m_shaderPrograms.push_back(m_shaderProgram);
 
+    ShaderProgram* axesShaderProgram = new ShaderProgram("../shader/ejes_vertex_shader.glsl", "../shader/ejes_shader.glsl");
+    m_shaderPrograms.push_back(axesShaderProgram);
+
     //Se inicializan todos los modelos a usar
-    // En lugar de "cubo" se instancia el objeto model (cambie lo que estaba por defecto)
+    Model* ejes = new Eje(m_shaderPrograms[1], 0);
+    m_models.push_back(ejes);
+
     Model* bunny = new ObjModel(m_shaderPrograms[0],"../assets/bunny.obj");
     m_models.push_back(bunny);
 
     Model* car = new ObjModel(m_shaderPrograms[0],"../assets/car.obj");
     m_models.push_back(car);
+
+    Model* house = new ObjModel(m_shaderPrograms[0],"../assets/casa.obj");
+    m_models.push_back(house);
+
+    Model* teapot = new ObjModel(m_shaderPrograms[0],"../assets/Teapot.obj");
+    m_models.push_back(teapot);
+
+    Model* cat = new ObjModel(m_shaderPrograms[0],"../assets/cat.obj");
+    m_models.push_back(cat);
+
+    Model* fish = new ObjModel(m_shaderPrograms[0],"../assets/pescado.obj");
+    m_models.push_back(fish);
+
+    Model* dragon = new ObjModel(m_shaderPrograms[0],"../assets/dragon.obj");
+    m_models.push_back(dragon);
 
     //Matriz de vista View Matrix
     //Posicion de la camara, centro de atencion, vector perpendicular de la Cámara

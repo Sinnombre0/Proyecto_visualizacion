@@ -18,7 +18,7 @@ void main()
 }
 */
 
-#version 330 core
+#version 400 core
 layout (location = 0) in vec3 aPos;
 
 // La altura
