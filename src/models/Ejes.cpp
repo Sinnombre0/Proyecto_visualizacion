@@ -47,5 +47,8 @@ void Eje::renderModel(const glm::mat4& view, const glm::mat4& projection){
 void Eje::updateModel(float){
 }
 
+void Eje::updateModel(float, int){
+}
+
 void Eje::finish(){
 }

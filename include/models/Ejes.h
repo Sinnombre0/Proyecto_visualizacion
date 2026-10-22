@@ -24,6 +24,8 @@ public:
 
     void updateModel(float deltaTime) override;
 
+    void updateModel(float deltaTime, int opcion) override;
+
     void finish() override;
 
 }; 

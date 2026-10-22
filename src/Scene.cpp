@@ -69,7 +69,7 @@ void Scene::render()  {
 
     size_t modeloActual = 1;
     bool teclaPresionada = false; //Evitamos que cambie muy rapido si se deja presionado
-    bool teclaParaRotar = false;
+    bool teclaParaRotar = true;
 
     //Ciclo de Renderizado
     glEnable(GL_DEPTH_TEST);  // Prueba de profundidad
@@ -119,7 +119,7 @@ void Scene::render()  {
         //Solo renderizamos el modelo actual y el eje de coordenadas
         m_models[0]->renderModel(m_view, m_projection);
         m_models[modeloActual]->renderModel(m_view, m_projection);
-        m_models[modeloActual]->updateModel(0.7f);
+        //m_models[modeloActual]->updateModel(0.7f);
         
         // update models 
         glfwSwapBuffers(m_window->getWindow());
@@ -130,22 +130,21 @@ void Scene::render()  {
         // Realizamos la rotacion del modelo dependiendo de la tecla presionada 
         // Giramos en el eje x, y, z
         if (glfwGetKey(m_window->getWindow(), GLFW_KEY_X) == GLFW_PRESS) {
-            if (!teclaParaRotar) {
-                m_models[modeloActual]->updateModel(1.0f);
-                teclaParaRotar = true;
+            if (teclaParaRotar) {
+                m_models[modeloActual]->updateModel(1.0f, 1);
+                teclaParaRotar = false;
             }
-        }
-        if (glfwGetKey(m_window->getWindow(), GLFW_KEY_Y) == GLFW_PRESS) {
-            if (!teclaParaRotar) {
-                m_models[modeloActual]->updateModel(2.0f);
-                teclaParaRotar = true;
+        }else if (glfwGetKey(m_window->getWindow(), GLFW_KEY_Y) == GLFW_PRESS) {
+            if (teclaParaRotar) {
+                m_models[modeloActual]->updateModel(1.0f, 2);
+                teclaParaRotar = false;
             }
-        }
-        if (glfwGetKey(m_window->getWindow(), GLFW_KEY_Z) == GLFW_PRESS) {
-            if (!teclaParaRotar) {
-                m_models[modeloActual]->updateModel(3.0f);
-                teclaParaRotar = true;
+        }else if (glfwGetKey(m_window->getWindow(), GLFW_KEY_Z) == GLFW_PRESS) {
+            if (teclaParaRotar) {
+                m_models[modeloActual]->updateModel(1.0f, 3);
+                teclaParaRotar = false;
             }
+            teclaParaRotar = false;
         }
 
         if (m_cameraMovement)

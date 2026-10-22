@@ -5,7 +5,7 @@
 class ObjModel : public Model {
 private:
     int numIndices;
-    float m_angulo;
+    float m_angulo = 0.0f;
 
 protected:
     void initGeometry() override;
@@ -16,5 +16,8 @@ public:
     ObjModel(ShaderProgram* shader, const char* rutaArchivo);
     void renderModel(const glm::mat4& view, const glm::mat4& projection) override;
     void updateModel(float dt) override;
+
+    void updateModel(float dt, int opcion);
+
     void finish() override;
 };

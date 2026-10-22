@@ -74,6 +74,8 @@ public:
      */
     virtual void updateModel(float deltaTime) = 0;
 
+    virtual void updateModel(float deltaTime, int opcion) = 0;
+
     /**
      * @brief Limpia recursos 
      */
