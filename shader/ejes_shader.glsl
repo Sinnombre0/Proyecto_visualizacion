@@ -1,9 +1,9 @@
 #version 400 core
 
 in vec3 ejesColor;
-out vec4 FragColor;
+out vec4 Color;
 
 void main()
 {
-    FragColor = vec4(ejesColor, 1.0);
+    Color = vec4(ejesColor, 1.0);
 }

@@ -131,20 +131,16 @@ void Scene::render()  {
         // Giramos en el eje x, y, z
         if (glfwGetKey(m_window->getWindow(), GLFW_KEY_X) == GLFW_PRESS) {
             if (teclaParaRotar) {
-                m_models[modeloActual]->updateModel(1.0f, 1);
-                teclaParaRotar = false;
+                m_models[modeloActual]->updateModel(7.0f, 1);
             }
         }else if (glfwGetKey(m_window->getWindow(), GLFW_KEY_Y) == GLFW_PRESS) {
             if (teclaParaRotar) {
-                m_models[modeloActual]->updateModel(1.0f, 2);
-                teclaParaRotar = false;
+                m_models[modeloActual]->updateModel(7.0f, 2);
             }
         }else if (glfwGetKey(m_window->getWindow(), GLFW_KEY_Z) == GLFW_PRESS) {
             if (teclaParaRotar) {
-                m_models[modeloActual]->updateModel(1.0f, 3);
-                teclaParaRotar = false;
+                m_models[modeloActual]->updateModel(7.0f, 3);
             }
-            teclaParaRotar = false;
         }
 
         if (m_cameraMovement)

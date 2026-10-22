@@ -76,18 +76,19 @@ void ObjModel::updateModel(float dt) {
 
 // Intento de implementacion de las rotaciones en los ejes x, y, z
 void ObjModel::updateModel(float dt, int opcion){
-    //Esto para hacer rotaciones
-    m_angulo += dt * 1.0f; // Incrementamos el ángulo de rotación
-    if (opcion == 1)
-    {
-        m_model_mat= glm::rotate(m_model_mat,glm::radians(m_angulo),glm::vec3(1.0f,0.0f,0.0f));
-    } else if (opcion == 2)
-    {
-        m_model_mat=glm::rotate(m_model_mat,glm::radians(m_angulo),glm::vec3(0.0f,1.0f,0.0f));
-    } else if (opcion == 3)
-    {
-        m_model_mat=glm::rotate(m_model_mat,glm::radians(m_angulo),glm::vec3(0.0f,0.0f,1.0f));
+    glm::vec3 eje;
+
+    if (opcion == 1) {
+        eje = glm::vec3(1.0f, 0.0f, 0.0f);
+    } else if (opcion == 2) {
+        eje = glm::vec3(0.0f, 1.0f, 0.0f);
+    } else if (opcion == 3) {
+        eje = glm::vec3(0.0f, 0.0f, 1.0f);
+    } else {
+        return;
     }
+
+    m_model_mat = glm::rotate(m_model_mat, glm::radians(dt), eje );
 }
 
 void ObjModel::initGeometry() {
