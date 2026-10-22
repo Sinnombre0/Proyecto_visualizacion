@@ -33,7 +33,7 @@ void Scene::init(){
     m_shaderPrograms.push_back(ejesShaderProgram);
 
     //Se inicializan todos los modelos a usar
-    Model* ejes = new Eje(m_shaderPrograms[1], 0);
+    Model* ejes = new Eje(m_shaderPrograms[0], 0);
     m_models.push_back(ejes);
 
     Model* bunny = new ObjModel(m_shaderPrograms[0],"../assets/bunny.obj");
@@ -67,8 +67,9 @@ void Scene::init(){
 
 void Scene::render()  {
 
-    size_t modeloActual = 0;
+    size_t modeloActual = 1;
     bool teclaPresionada = false; //Evitamos que cambie muy rapido si se deja presionado
+    bool teclaParaRotar = false;
 
     //Ciclo de Renderizado
     glEnable(GL_DEPTH_TEST);  // Prueba de profundidad
@@ -93,13 +94,13 @@ void Scene::render()  {
             if(!teclaPresionada) {
                 modeloActual++;
                 // Volver al primer modelo
-                if(modeloActual >= m_models.size()) modeloActual = 0;
+                if(modeloActual >= m_models.size()) modeloActual = 1;
                 teclaPresionada = true; 
             }
         }
         else if (glfwGetKey(m_window->getWindow(), GLFW_KEY_LEFT) == GLFW_PRESS) {
             if (!teclaPresionada) {
-                if(modeloActual == 0) {
+                if(modeloActual == 1) {
                     modeloActual = m_models.size() - 1; // Ir al último
                 } else {
                     modeloActual--;
@@ -115,7 +116,8 @@ void Scene::render()  {
         glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        //Solo renderizamos el modelo actual
+        //Solo renderizamos el modelo actual y el eje de coordenadas
+        m_models[0]->renderModel(m_view, m_projection);
         m_models[modeloActual]->renderModel(m_view, m_projection);
         m_models[modeloActual]->updateModel(0.7f);
         
@@ -123,7 +125,28 @@ void Scene::render()  {
         glfwSwapBuffers(m_window->getWindow());
         glfwPollEvents();
 
-        m_models[modeloActual]->updateModel(0.7f);
+       // m_models[modeloActual]->updateModel(0.7f);
+
+        // Realizamos la rotacion del modelo dependiendo de la tecla presionada 
+        // Giramos en el eje x, y, z
+        if (glfwGetKey(m_window->getWindow(), GLFW_KEY_X) == GLFW_PRESS) {
+            if (!teclaParaRotar) {
+                m_models[modeloActual]->updateModel(1.0f);
+                teclaParaRotar = true;
+            }
+        }
+        if (glfwGetKey(m_window->getWindow(), GLFW_KEY_Y) == GLFW_PRESS) {
+            if (!teclaParaRotar) {
+                m_models[modeloActual]->updateModel(2.0f);
+                teclaParaRotar = true;
+            }
+        }
+        if (glfwGetKey(m_window->getWindow(), GLFW_KEY_Z) == GLFW_PRESS) {
+            if (!teclaParaRotar) {
+                m_models[modeloActual]->updateModel(3.0f);
+                teclaParaRotar = true;
+            }
+        }
 
         if (m_cameraMovement)
         {

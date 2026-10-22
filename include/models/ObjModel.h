@@ -5,6 +5,7 @@
 class ObjModel : public Model {
 private:
     int numIndices;
+    float m_angulo;
 
 protected:
     void initGeometry() override;

@@ -71,8 +71,22 @@ void ObjModel::renderModel(const glm::mat4& view, const glm::mat4& projection) {
     //Hasta aquí
 }
 
+// Intento de implementacion de las rotaciones 
 void ObjModel::updateModel(float dt) {
     //Esto para hacer rotaciones
+       if (dt == 1)
+    {
+        m_angulo += dt *1.0;
+        m_model_mat = glm::mat4(1.0f);
+        m_model_mat= glm::rotate(m_model_mat,glm::radians(m_angulo),glm::vec3(1.0f,0.0f,0.0f));
+    } else if (dt == 2)
+    {
+        m_model_mat=glm::rotate(m_model_mat,glm::radians(dt),glm::vec3(0.0f,1.0f,0.0f));
+    } else if (dt == 3)
+    {
+        m_model_mat=glm::rotate(m_model_mat,glm::radians(dt),glm::vec3(0.0f,0.0f,1.0f));
+    }
+    
 }
 
 void ObjModel::initGeometry() {
