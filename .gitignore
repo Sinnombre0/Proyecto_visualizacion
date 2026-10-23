@@ -1,0 +1,2 @@
+# Ignoramos el build para evitar subiir lo compilado
+build/
