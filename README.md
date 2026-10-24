@@ -7,15 +7,17 @@ Implementacion del visualizador de archivos obj
 ## Integrantes
 
 
-Lechuga Hervert Maximiliano
+- Lechuga Hervert Maximiliano
 
-321311186
+- 321311186
 
-lechuga@ciencias.unam.mx
+- lechuga@ciencias.unam.mx
 
-integrante 2
-N cuenta
-Correo
+- Olivares Pérez Ángel Daniel
+
+- 321110161
+
+- angeldanielolivares@ciencias.unam.mx
 
 ## Compilación
 
