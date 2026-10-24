@@ -6,10 +6,14 @@ Implementacion del visualizador de archivos obj
 
 ## Integrantes
 
-| Nombre completo | Matrícula | Correo |
-|---|---|---|
-| [Lechuga Hervert Maximiliano] | [321311186] | [lechuga@ciencias.unam.mx] |
-| [Nombre del integrante 2] | [Matrícula] | [Correo] |
+
+Lechuga Hervert Maximiliano
+321311186
+lechuga@ciencias.unam.mx
+
+integrante 2
+N cuenta
+Correo
 
 ## Compilación
 
