@@ -30,10 +30,6 @@ ObjModel::ObjModel(ShaderProgram* shader, const char* rutaArchivo): Model(shader
     //Tomamos el mas grande y lo convertimos en el actor de escala
     float maxGrande = std::max({longitud.x, longitud.y, longitud.z});
     float scalaFactor = 2.0f / maxGrande;
-    
-
-    // Hacemos la matriz
-    //glm::mat4 modeloMatriz = glm::mat4(1.0f);
 
     //Primero hacemos que nuestro objeto se mueva alcentro y despues se escale
     m_model_mat = glm::mat4(1.0f);
