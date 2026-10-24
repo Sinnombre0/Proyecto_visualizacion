@@ -8,7 +8,9 @@ Implementacion del visualizador de archivos obj
 
 
 Lechuga Hervert Maximiliano
+
 321311186
+
 lechuga@ciencias.unam.mx
 
 integrante 2
